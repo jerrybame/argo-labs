@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: vote
+  labels:
+    app: vote
+    tier: front
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: vote
+  strategy:
+    blueGreen:
+      activeService: vote               # stable/live traffic
+      previewService: vote-preview      # new version traffic
+      autoPromotionEnabled: true        # manual promotion — you decide when to cut over
+      scaleDownDelaySeconds: 30         # keep blue pods up 30s after cutover for rollback
+  template:
+    metadata:
+      labels:
+        app: vote
+        tier: front
+    spec:
+      containers:
+        - name: vote
+          image: jerrybame/website:2.0.1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"

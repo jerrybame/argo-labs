@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: vote
-          image: jerrybame/containerofcats:latest
+          image: jerrybame/website:latest
           imagePullPolicy: Always
           resources:
             requests:

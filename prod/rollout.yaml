@@ -17,14 +17,14 @@ spec:
           replicas: 3
       - setWeight: 20
       - pause:
-          duration: 30s
+          duration: 10s
       - setWeight: 40
       - pause:
-          duration: 60s
+          duration: 30s
       - setWeight: 60
       - pause:
-          duration: 60s
+          duration: 30s
       - setWeight: 80
       - pause:
-          duration: 60s
+          duration: 30s
       - setWeight: 100
